@@ -1,7 +1,7 @@
 {
   "name": "web-console-log",
-  "version": "1.0.0",
-  "main": "webpack.config.js",
+  "version": "0.0.1",
+  "main": "dist/web-console-log.js",
   "scripts": {
     "watch": "npx webpack watch",
     "build": "npx webpack",
@@ -9,7 +9,7 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "description": "",
   "devDependencies": {
     "webpack": "^5.96.1",

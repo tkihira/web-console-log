@@ -1,13 +1,27 @@
 let contentDiv = null;
 let messageCount = 0;
+let isInitialized = false;
+const pendingMessageQueue = [];
 
 const initializeMessage = (consoleElements) => {
     ({ contentDiv } = consoleElements);
     messageCount = 0;
+    isInitialized = true;
+
+    if (pendingMessageQueue.length) {
+        for (const message of pendingMessageQueue) {
+            appendMessage.apply(null, message);
+        }
+        pendingMessageQueue.length = 0;
+    }
 };
 
 const appendMessage = (message, logLevel, isError) => {
-    if(messageCount > 1000) {
+    if (!isInitialized) {
+        pendingMessageQueue.push([message, logLevel, isError]);
+        return;
+    }
+    if (messageCount > 1000) {
         return;
     }
     const doScroll = (contentDiv.scrollTop + contentDiv.offsetHeight >= contentDiv.scrollHeight);
@@ -45,7 +59,7 @@ const appendMessage = (message, logLevel, isError) => {
         iconSpan.style.marginTop = "1px";
         iconSpan.style.marginRight = "3px";
 
-        for(let i = 0; i < 2; i++) {
+        for (let i = 0; i < 2; i++) {
             const slashSpan = document.createElement("span");
             iconSpan.appendChild(slashSpan);
             slashSpan.style.position = "absolute";
@@ -63,7 +77,7 @@ const appendMessage = (message, logLevel, isError) => {
     }
 
     messageCount++;
-    if(messageCount === 1000) {
+    if (messageCount === 1000) {
         appendMessage("Too many messages. Logging stopped.", "warn", true);
     }
 };
