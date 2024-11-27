@@ -1,0 +1,18 @@
+{
+  "name": "web-console-log",
+  "version": "1.0.0",
+  "main": "webpack.config.js",
+  "scripts": {
+    "watch": "npx webpack watch",
+    "build": "npx webpack",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "webpack": "^5.96.1",
+    "webpack-cli": "^5.1.4"
+  }
+}
