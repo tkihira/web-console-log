@@ -1,4 +1,13 @@
-function safeStringify(obj) {
+import { appendLog } from "./renderMessage";
+
+const safeStringify = function (obj) {
+    if (typeof obj === "string" || typeof obj === "number") {
+        return String(obj);
+    }
+    if (typeof obj === "function") {
+        return `[Function: ${obj.name || "anonymous"}]`;
+    }
+
     const seen = new WeakSet();
 
     return JSON.stringify(
@@ -35,5 +44,32 @@ function safeStringify(obj) {
     );
 }
 
+const replaceConsoleFunctions = () => {
+    const originalConsoleLog = console.log;
+    const originalConsoleWarn = console.warn;
+    const originalConsoleError = console.error;
+    console.log = function (message) {
+        if (arguments.length > 1) {
+            message = [...arguments];
+        }
+        appendLog(safeStringify(message));
+        originalConsoleLog.apply(console, arguments);
+    };
+    console.warn = function (message) {
+        if (arguments.length > 1) {
+            message = [...arguments];
+        }
+        appendLog(safeStringify(message), "warn");
+        originalConsoleWarn.apply(console, arguments);
+    };
+    console.error = function (message) {
+        if (arguments.length > 1) {
+            message = [...arguments];
+        }
+        appendLog(safeStringify(message), "error");
+        originalConsoleError.apply(console, arguments);
+    };
+};
 
-export { safeStringify };
+
+export { replaceConsoleFunctions };
