@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Web Console Log - Sample page (test.html)</title>
+    <script src="https://cdn.jsdelivr.net/npm/web-console-log"></script>
+</head>
+
+<body>
+    <script>
+        setTimeout(() => {
+            console.log("console.log test");
+            console.warn("console.warn test");
+            console.error("console.error test");
+            console.log("==================\n\n\n");
+        }, 2000);
+        setTimeout(() => {
+            ErrorTest;
+        }, 4000);
+        (async () => {
+            await new Promise(r => setTimeout(r, 6000));
+            InPromiseErrorTest;
+        })();
+        (async () => {
+            await new Promise(r => setTimeout(r, 8000));
+            const callStackExceededTest = () => callStackExceededTest();
+            callStackExceededTest();
+        })();
+    </script>
+</body>
+
+</html>
