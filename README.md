@@ -12,7 +12,7 @@ A lightweight utility that provides a **console.log** and **Error log screen** d
 
 ## Live Demo
 
-https://tkihira.github.io/web-console-log/
+https://tkihira.github.io/web-console-log/sample.html
 
 ## Why Use Web Console Log?
 

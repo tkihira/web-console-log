@@ -29,7 +29,7 @@ const appendMessage = (message, logLevel, isError) => {
 
     notifyMessage();
 
-    const doScroll = (contentDiv.scrollTop + contentDiv.offsetHeight >= contentDiv.scrollHeight);
+    const doScroll = (contentDiv.scrollTop + contentDiv.offsetHeight >= contentDiv.scrollHeight - 2);
 
     const messageDiv = document.createElement("div");
     contentDiv.append(messageDiv);
