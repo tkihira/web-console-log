@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>test</title>
+    <title>Web Console Log - test</title>
     <script src="./dist/web-console-log.js"></script>
 </head>
 
@@ -12,7 +12,7 @@
             console.log("console.log test");
             console.warn("console.warn test");
             console.error("console.error test");
-            console.log("==================\n\n\n");
+            console.log({ "Hello,": "World!" });
         }, 2000);
         setTimeout(() => {
             ErrorTest;
@@ -26,6 +26,9 @@
             const callStackExceededTest = () => callStackExceededTest();
             callStackExceededTest();
         })();
+        setTimeout(() => {
+            console.log("Happy debugging! 🚀");
+        }, 10000);
     </script>
 </body>
 
