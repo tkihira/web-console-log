@@ -53,23 +53,23 @@ const replaceConsoleFunctions = () => {
             message = [...arguments];
         }
         appendLog(safeStringify(message));
-        originalConsoleLog.apply(console, arguments);
+        originalConsoleLog.apply(this, arguments);
     };
     console.warn = function (message) {
         if (arguments.length > 1) {
             message = [...arguments];
         }
         appendLog(safeStringify(message), "warn");
-        originalConsoleWarn.apply(console, arguments);
+        originalConsoleWarn.apply(this, arguments);
     };
     console.error = function (message) {
         if (arguments.length > 1) {
             message = [...arguments];
         }
         appendLog(safeStringify(message), "error");
-        originalConsoleError.apply(console, arguments);
+        originalConsoleError.apply(this, arguments);
     };
 };
 
 
-export { replaceConsoleFunctions };
+export { safeStringify, replaceConsoleFunctions };
