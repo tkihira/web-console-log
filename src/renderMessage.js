@@ -1,3 +1,5 @@
+import { notifyMessage } from "./interface";
+
 let contentDiv = null;
 let messageCount = 0;
 let isInitialized = false;
@@ -24,6 +26,9 @@ const appendMessage = (message, logLevel, isError) => {
     if (messageCount > 1000) {
         return;
     }
+
+    notifyMessage();
+
     const doScroll = (contentDiv.scrollTop + contentDiv.offsetHeight >= contentDiv.scrollHeight);
 
     const messageDiv = document.createElement("div");

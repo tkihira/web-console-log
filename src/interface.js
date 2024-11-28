@@ -1,6 +1,8 @@
 let isConsoleMinimized = false;
-let isConsoleOpen = false;
+let isConsoleVisible = false;
 let isIconVisible = false;
+
+let notifyMessage = () => {};
 
 const initializeInterface = (consoleElements) => {
     const { iconDiv, consoleRootDiv, headerDiv, closeButton } = consoleElements;
@@ -9,29 +11,29 @@ const initializeInterface = (consoleElements) => {
         iconDiv.style.display = isIconVisible ? "none" : "flex";
         isIconVisible = !isIconVisible;
     };
-    
+
     const toggleConsoleVisibility = () => {
-        consoleRootDiv.style.display = isConsoleOpen ? "none" : "flex";
-        isConsoleOpen = !isConsoleOpen;
+        consoleRootDiv.style.display = isConsoleVisible ? "none" : "flex";
+        isConsoleVisible = !isConsoleVisible;
     };
 
     const toggleConsoleMinimized = () => {
         consoleRootDiv.style.height = isConsoleMinimized ? "30%" : headerDiv.offsetHeight + "px";
         isConsoleMinimized = !isConsoleMinimized;
     };
-        
+
     const rootDiv = document.createElement("div");
     document.body.appendChild(rootDiv);
     rootDiv.append(consoleRootDiv, iconDiv);
 
-    isConsoleOpen = false;
+    isConsoleVisible = false;
     isIconVisible = false;
     isConsoleMinimized = false;
     iconDiv.style.display = "none";
     consoleRootDiv.style.display = "none";
 
     // toggleIconVisibility(); // debug
-    toggleConsoleVisibility(); // debug
+    // toggleConsoleVisibility(); // debug
 
     iconDiv.onclick = () => {
         toggleIconVisibility();
@@ -56,7 +58,12 @@ const initializeInterface = (consoleElements) => {
 
         return false;
     };
+
+    notifyMessage = () => {
+        if (!isIconVisible && !isConsoleVisible) {
+            toggleIconVisibility();
+        }
+    }
 };
 
-
-export { initializeInterface };
+export { initializeInterface, notifyMessage };

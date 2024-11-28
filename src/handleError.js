@@ -1,38 +1,28 @@
-import { safeStringify } from "./handleMessage";
+import { getBaseDirectory, parseStackString, safeStringify } from "./util";
 import { appendError } from "./renderMessage";
 
-const baseUrl = location.href;
-
-const displayError = (message, stack) => {
-    if (stack) {
-        const callstack = [message];
-        for (const line of stack.split("\n")) {
-            let filename, lineno, colno;
-            {
-                const match = /^    at (.+):([0-9]+):([0-9]+)$/.exec(line);
-                if (match) {
-                    [, filename, lineno, colno] = match;
-                }
-            }
-            {
-                const match = /^@(.+):([0-9]+):([0-9]+)$/.exec(line);
-                if (match) {
-                    [, filename, lineno, colno] = match;
-                }
-            }
-            if (filename) {
-                if (filename.indexOf(baseUrl) === 0) {
-                    filename = filename.substring(baseUrl.length);
-                    if (filename.length === 0) {
-                        filename = '(index)'
-                    } else {
-                        filename = './' + filename;
-                    }
-                }
-                callstack.push(`    at ${filename}:${lineno}:${colno}`);
-            }
+const displayError = (message, stackString) => {
+    if (stackString) {
+        const callstack = parseStackString(stackString);
+        if (callstack[0] && callstack[0].filename.indexOf(getBaseDirectory()) !== 0) {
+            return;
         }
-        message = callstack.join("\n");
+
+        message = [message, ...callstack.map(({ funcname, filename, lineno, colno }) => {
+            if (filename.indexOf(getBaseDirectory()) === 0) {
+                filename = filename.substring(getBaseDirectory().length);
+                if (filename.length === 0) {
+                    filename = '(index)';
+                } else {
+                    filename = './' + filename;
+                }
+            }
+            if (funcname) {
+                return `    at ${funcname} (${filename}:${lineno}:${colno})`;
+            } else {
+                return `    at ${filename}:${lineno}:${colno}`;
+            }
+        })].join("\n");
     }
     appendError(message.trim())
 };
