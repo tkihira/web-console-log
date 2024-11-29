@@ -18,16 +18,16 @@ const initializeMessage = (consoleElements) => {
     }
 };
 
-const appendMessage = (message, logLevel, isError) => {
+const appendMessage = (message, logLevel, hasBadge) => {
     if (!isInitialized) {
-        pendingMessageQueue.push([message, logLevel, isError]);
+        pendingMessageQueue.push([message, logLevel, hasBadge]);
         return;
     }
     if (messageCount > 1000) {
         return;
     }
 
-    notifyMessage();
+    notifyMessage(logLevel === "error");
 
     const doScroll = (contentDiv.scrollTop + contentDiv.offsetHeight >= contentDiv.scrollHeight - 2);
 
@@ -51,7 +51,7 @@ const appendMessage = (message, logLevel, isError) => {
         messageDiv.removeChild(messageDiv.firstChild);
     }
 
-    if (isError) {
+    if (hasBadge) {
         const iconSpan = document.createElement("span");
         iconSpan.style.width = "13px";
         iconSpan.style.height = "13px";

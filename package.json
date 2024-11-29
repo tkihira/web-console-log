@@ -1,14 +1,14 @@
 {
   "name": "web-console-log",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "main": "dist/web-console-log.js",
   "scripts": {
     "watch": "npx webpack watch",
     "build": "npx webpack",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "clean": "cd dist && rm *"
   },
   "keywords": [],
-  "author": "",
+  "author": "Takuo Kihira",
   "license": "MIT",
   "description": "",
   "devDependencies": {

@@ -10,11 +10,11 @@
     <script>
         setTimeout(() => {
             console.log("console.log test");
+        }, 2000);
+        setTimeout(() => {
             console.warn("console.warn test");
             console.error("console.error test");
             console.log({ "Hello,": "World!" });
-        }, 2000);
-        setTimeout(() => {
             ErrorTest;
         }, 4000);
         (async () => {

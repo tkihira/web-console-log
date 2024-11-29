@@ -16,7 +16,7 @@ const createIconDiv = () => {
     iconDiv.style.boxShadow = "0 0 5px rgba(0, 0, 0, 0.1)"
     iconDiv.style.cursor = "pointer";
     iconDiv.style.opacity = 0.2;
-    iconDiv.style.transition = "opacity 150ms ease-out";
+    iconDiv.style.transition = "opacity 150ms ease-out, background-color 150ms ease-out, border-color 150ms ease-out";
 
     const iTopDiv = document.createElement("div");
     iconDiv.appendChild(iTopDiv);
