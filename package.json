@@ -1,6 +1,6 @@
 {
   "name": "web-console-log",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "main": "dist/web-console-log.js",
   "scripts": {
     "watch": "npx webpack watch",

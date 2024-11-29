@@ -89,6 +89,7 @@ const createConsoleElements = () => {
     consoleRootDiv.appendChild(contentDiv);
     contentDiv.style.padding = "3px 8px";
     contentDiv.style.width = "100%";
+    contentDiv.style.height = "100%";
     contentDiv.style.color = "white";
     contentDiv.style.fontSize = "14px";
     contentDiv.style.overflow = "scroll";

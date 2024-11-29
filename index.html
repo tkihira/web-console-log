@@ -7,28 +7,124 @@
 </head>
 
 <body>
+    <h1>Web Console Log</h1>
+    <hr>
+    <button onclick="console_log_test()">console.log test</button><br>
+    <button onclick="console_warn_test()">console.warn test</button><br>
+    <button onclick="console_error_test()">console.error test</button><br>
+    <button onclick="console_log_obj_test()">console.log(object) test</button><br>
+    <hr>
+    <button onclick="error_test()">normal error test</button><br>
+    <button onclick="promise_error_test()">promise error test</button><br>
+    <button onclick="stack_size_exceeded_test()">stack size exceeded test</button><br>
+    <hr>
+    <button onclick="auto_test()">automatic test</button><br>
+    <svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 461.3273325691626 175.22015572236114" width="307"
+        height="117" style="display:none; position: fixed; bottom: 40px; right: 25px;">
+        <!-- svg-source:excalidraw -->
+
+        <defs>
+            <style class="style-fonts">
+                @font-face {
+                    font-family: Excalifont;
+                    src: url(data:font/woff2;base64,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);
+                }
+            </style>
+
+        </defs>
+        <rect x="0" y="0" width="461.3273325691626" height="175.22015572236114" fill="#ffffff"></rect>
+        <g stroke-linecap="round">
+            <g transform="translate(306.5894976961121 48.379717454027514) rotate(0 71.83984375 57.904296875)">
+                <path
+                    d="M-0.66 0.6 C16.4 4.29, 78.11 3.43, 102.35 22.8 C126.58 42.17, 137.69 101.32, 144.74 116.84 M1.19 -0.14 C18.05 3.7, 77.25 5.1, 101.14 24.3 C125.03 43.49, 137.15 99.57, 144.53 115.04"
+                    stroke="#1e1e1e" stroke-width="4" fill="none"></path>
+            </g>
+            <g transform="translate(306.5894976961121 48.379717454027514) rotate(0 71.83984375 57.904296875)">
+                <path
+                    d="M128.6 95.77 C134.45 100.79, 138.09 109.14, 144.53 115.04 M128.6 95.77 C135.62 102.56, 141.9 109.91, 144.53 115.04"
+                    stroke="#1e1e1e" stroke-width="4" fill="none"></path>
+            </g>
+            <g transform="translate(306.5894976961121 48.379717454027514) rotate(0 71.83984375 57.904296875)">
+                <path
+                    d="M144.71 90.04 C145.78 96.68, 144.6 106.75, 144.53 115.04 M144.71 90.04 C145.56 99.05, 145.62 108.62, 144.53 115.04"
+                    stroke="#1e1e1e" stroke-width="4" fill="none"></path>
+            </g>
+        </g>
+        <mask></mask>
+        <g
+            transform="translate(10.447409987482445 12.03386701299047) rotate(359.17888132664973 142.15445363521576 32.23895353296231)">
+            <text x="0" y="45.44402890006366" font-family="Excalifont, Xiaolai, Segoe UI Emoji"
+                font-size="51.58232565273968px" fill="#1e1e1e" text-anchor="start" style="white-space: pre;"
+                direction="ltr" dominant-baseline="alphabetic">Press Here!</text>
+        </g>
+    </svg>
+
     <script>
-        setTimeout(() => {
+        function showSvg() {
+            document.getElementsByTagName("svg")[0].style.display = "block";
+        }
+
+        function console_log_test() {
+            showSvg();
             console.log("console.log test");
-        }, 2000);
-        setTimeout(() => {
+        }
+
+        function console_warn_test() {
+            showSvg();
             console.warn("console.warn test");
+        }
+
+        function console_error_test() {
+            showSvg();
             console.error("console.error test");
-            console.log({ "Hello,": "World!" });
+        }
+
+        function console_log_obj_test() {
+            showSvg();
+            console.log({ "Hello, ": "World!" });
+        }
+
+        function error_test() {
+            showSvg();
             ErrorTest;
-        }, 4000);
-        (async () => {
-            await new Promise(r => setTimeout(r, 6000));
+        }
+
+        async function promise_error_test() {
+            showSvg();
+            await Promise.resolve();
             InPromiseErrorTest;
-        })();
-        (async () => {
-            await new Promise(r => setTimeout(r, 8000));
+        }
+
+        function stack_size_exceeded_test() {
+            showSvg();
             const callStackExceededTest = () => callStackExceededTest();
             callStackExceededTest();
-        })();
-        setTimeout(() => {
-            console.log("Happy debugging! 🚀");
-        }, 10000);
+        }
+
+        function auto_test() {
+            showSvg();
+            console.log("console.log test");
+            setTimeout(() => {
+                console.warn("console.warn test");
+                console.error("console.error test");
+            }, 2000);
+            setTimeout(() => {
+                console.log({ "Hello, ": "World!" });
+                ErrorTest;
+            }, 4000);
+            (async () => {
+                await new Promise(r => setTimeout(r, 6000));
+                InPromiseErrorTest;
+            })();
+            (async () => {
+                await new Promise(r => setTimeout(r, 8000));
+                const callStackExceededTest = () => callStackExceededTest();
+                callStackExceededTest();
+            })();
+            setTimeout(() => {
+                console.log("Happy debugging! 🚀");
+            }, 10000);
+        }
     </script>
 </body>
 
