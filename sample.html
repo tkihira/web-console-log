@@ -7,9 +7,21 @@
 </head>
 
 <body>
+    <h1>Web Console Log - Sample page</h1>
     Please make sure to visit <a href="https://github.com/tkihira/web-console-log">the repository page</a>!
+    <hr>
+    <button onclick="console_log_test()">console.log test</button><br>
+    <button onclick="console_warn_test()">console.warn test</button><br>
+    <button onclick="console_error_test()">console.error test</button><br>
+    <button onclick="console_log_obj_test()">console.log(object) test</button><br>
+    <hr>
+    <button onclick="error_test()">normal error test</button><br>
+    <button onclick="promise_error_test()">promise error test</button><br>
+    <button onclick="stack_size_exceeded_test()">stack size exceeded test</button><br>
+    <hr>
+    <button onclick="auto_test()">automatic test</button><br>
     <svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 461.3273325691626 175.22015572236114" width="307"
-        height="117" style="position: fixed; bottom: 40px; right: 25px;">
+        height="117" style="display:none; position: fixed; bottom: 40px; right: 25px;">
         <!-- svg-source:excalidraw -->
 
         <defs>
@@ -49,27 +61,71 @@
     </svg>
 
     <script>
-        setTimeout(() => {
+        function showSvg() {
+            document.getElementsByTagName("svg")[0].style.display = "block";
+        }
+
+        function console_log_test() {
+            showSvg();
             console.log("console.log test");
+        }
+
+        function console_warn_test() {
+            showSvg();
             console.warn("console.warn test");
+        }
+
+        function console_error_test() {
+            showSvg();
             console.error("console.error test");
+        }
+
+        function console_log_obj_test() {
+            showSvg();
             console.log({ "Hello, ": "World!" });
-        }, 2000);
-        setTimeout(() => {
+        }
+
+        function error_test() {
+            showSvg();
             ErrorTest;
-        }, 4000);
-        (async () => {
-            await new Promise(r => setTimeout(r, 6000));
+        }
+
+        async function promise_error_test() {
+            showSvg();
+            await Promise.resolve();
             InPromiseErrorTest;
-        })();
-        (async () => {
-            await new Promise(r => setTimeout(r, 8000));
+        }
+
+        function stack_size_exceeded_test() {
+            showSvg();
             const callStackExceededTest = () => callStackExceededTest();
             callStackExceededTest();
-        })();
-        setTimeout(() => {
-            console.log("Happy debugging! 🚀");
-        }, 10000);
+        }
+
+        function auto_test() {
+            showSvg();
+            console.log("console.log test");
+            setTimeout(() => {
+                console.warn("console.warn test");
+                console.error("console.error test");
+            }, 2000);
+            setTimeout(() => {
+                console.log({ "Hello, ": "World!" });
+                ErrorTest;
+            }, 4000);
+            (async () => {
+                await new Promise(r => setTimeout(r, 6000));
+                InPromiseErrorTest;
+            })();
+            (async () => {
+                await new Promise(r => setTimeout(r, 8000));
+                const callStackExceededTest = () => callStackExceededTest();
+                callStackExceededTest();
+            })();
+            setTimeout(() => {
+                console.log("Happy debugging! 🚀");
+            }, 10000);
+        }
     </script>
 </body>
 
