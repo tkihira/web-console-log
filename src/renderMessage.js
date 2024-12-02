@@ -5,6 +5,8 @@ let messageCount = 0;
 let isInitialized = false;
 const pendingMessageQueue = [];
 
+let storedMessage = "";
+
 const initializeMessage = (consoleElements) => {
     ({ contentDiv } = consoleElements);
     messageCount = 0;
@@ -77,6 +79,8 @@ const appendMessage = (message, logLevel, hasBadge) => {
         messageDiv.insertBefore(iconSpan, messageDiv.firstChild);
     }
 
+    storedMessage += `(${logLevel}): ${message}\n`;
+
     if (doScroll) {
         contentDiv.scrollTop = contentDiv.scrollHeight;
     }
@@ -95,4 +99,6 @@ const appendError = (message) => {
     appendMessage(message, "error", true);
 };
 
-export { initializeMessage, appendLog, appendError };
+const getStoredMessage = () => storedMessage;
+
+export { initializeMessage, appendLog, appendError, getStoredMessage };

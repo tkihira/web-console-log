@@ -75,6 +75,10 @@ const createConsoleElements = () => {
     const captionSpan = document.createElement("span");
     headerDiv.appendChild(captionSpan);
     captionSpan.textContent = "web-console-log";
+    const copyButton = document.createElement("button");
+    captionSpan.appendChild(copyButton);
+    copyButton.style.marginLeft = "15px";
+    copyButton.textContent = "copy"
 
     const closeButton = document.createElement("button");
     headerDiv.appendChild(closeButton);
@@ -97,7 +101,7 @@ const createConsoleElements = () => {
     contentDiv.style.whiteSpace = "pre-wrap";
     contentDiv.style.fontFamily = "Consolas, Menlo, Monaco, 'Courier New', monospace";
 
-    return { iconDiv: createIconDiv(), consoleRootDiv, headerDiv, closeButton, contentDiv };
+    return { iconDiv: createIconDiv(), consoleRootDiv, headerDiv, copyButton, closeButton, contentDiv };
 };
 
 export { createConsoleElements };

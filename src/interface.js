@@ -1,3 +1,5 @@
+import { getStoredMessage } from "./renderMessage";
+
 let isConsoleMinimized = false;
 let isConsoleVisible = false;
 let isIconVisible = false;
@@ -5,7 +7,7 @@ let isIconVisible = false;
 let notifyMessage = () => { };
 
 const initializeInterface = (consoleElements) => {
-    const { iconDiv, consoleRootDiv, headerDiv, closeButton } = consoleElements;
+    const { iconDiv, consoleRootDiv, headerDiv, copyButton, closeButton } = consoleElements;
 
     const toggleIconVisibility = () => {
         iconDiv.style.display = isIconVisible ? "none" : "flex";
@@ -44,6 +46,33 @@ const initializeInterface = (consoleElements) => {
     headerDiv.onclick = () => {
         toggleConsoleMinimized();
         return false;
+    };
+
+    copyButton.onclick = async (e) => {
+        e.stopPropagation();
+        const storedMessage = getStoredMessage();
+        const copiedSpan = document.createElement("span");
+
+        try {
+            await navigator.clipboard.writeText(storedMessage);
+            copiedSpan.textContent = "copied to the clipboard"
+        } catch(e) {
+            copiedSpan.textContent = "unable to copy to the clipboard."
+        }
+
+        copiedSpan.style.transition = "opacity 150ms ease-out";
+        copiedSpan.style.position = "absolute";
+        copiedSpan.style.marginLeft = "7px";
+        copiedSpan.style.marginTop = "3px";
+        copiedSpan.style.fontWeight = "normal";
+        copiedSpan.style.opacity = 1;
+        copyButton.parentElement.appendChild(copiedSpan);
+        (async() => {
+            await new Promise(r => setTimeout(r, 2000));
+            copiedSpan.style.opacity = 0;
+            await new Promise(r => setTimeout(r, 150));
+            copiedSpan.remove();
+        })();
     };
 
     closeButton.onclick = (e) => {
